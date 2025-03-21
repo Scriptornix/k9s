@@ -38,6 +38,7 @@ func Test_initXDGLocs(t *testing.T) {
 		dumpsDir           string
 		benchDir           string
 		hkFile             string
+		kmFile             string
 	}{
 		"check-env": {
 			configDir:          filepath.Join(tmp, "k9s-xdg", "config", "k9s"),
@@ -49,6 +50,7 @@ func Test_initXDGLocs(t *testing.T) {
 			dumpsDir:           filepath.Join(tmp, "k9s-xdg", "state", "k9s", "screen-dumps", "cl-1", "ct-1-1"),
 			benchDir:           filepath.Join(tmp, "k9s-xdg", "state", "k9s", "benchmarks", "cl-1", "ct-1-1"),
 			hkFile:             filepath.Join(tmp, "k9s-xdg", "config", "k9s", "hotkeys.yaml"),
+			kmFile:             filepath.Join(tmp, "k9s-xdg", "config", "k9s", "keymaps.yaml"),
 		},
 	}
 

@@ -1,0 +1,18 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "K9s keymaps schema",
+  "type": "object",
+  "patternProperties": {
+    ".*": {
+      "type": "object",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key that triggers the action."
+        }
+      },
+      "required": ["key"]
+    }
+  },
+  "additionalProperties": false
+}

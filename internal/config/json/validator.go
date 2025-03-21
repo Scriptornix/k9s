@@ -35,6 +35,9 @@ const (
 	// HotkeysSchema describes hotkeys schema.
 	HotkeysSchema = "hotkeys.json"
 
+	// KeymapSchema describes keymaps schema
+	KeymapsSchema = "keymaps.json"
+
 	// K9sSchema describes k9s config schema.
 	K9sSchema = "k9s.json"
 
@@ -70,6 +73,9 @@ var (
 	//go:embed schemas/hotkeys.json
 	hotkeysSchema string
 
+	//go:embed schemas/keymaps.json
+	keymapsSchema string
+
 	//go:embed schemas/skin.json
 	skinSchema string
 )
@@ -92,6 +98,7 @@ func NewValidator() *Validator {
 			PluginSchema:      gojsonschema.NewStringLoader(pluginSchema),
 			PluginMultiSchema: gojsonschema.NewStringLoader(pluginMultiSchema),
 			HotkeysSchema:     gojsonschema.NewStringLoader(hotkeysSchema),
+			KeymapsSchema:     gojsonschema.NewStringLoader(keymapsSchema),
 			SkinSchema:        gojsonschema.NewStringLoader(skinSchema),
 		},
 	}

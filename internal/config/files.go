@@ -43,6 +43,10 @@ var (
 	// hotkeysTpl tracks hotkeys default config template
 	hotkeysTpl []byte
 
+	//go:embed templates/keymaps.yaml
+	// keymapsTpl tracks keymaps default config template
+	keymapsTpl []byte
+
 	//go:embed templates/stock-skin.yaml
 	// stockSkinTpl tracks stock skin template
 	stockSkinTpl []byte
@@ -81,6 +85,9 @@ var (
 
 	// AppHotKeysFile tracks hotkeys config file.
 	AppHotKeysFile string
+
+	// AppKeymapsFile tracks keymaps config file.
+	AppKeymapsFile string
 )
 
 // InitLogLoc initializes K9s logs location.
@@ -156,6 +163,7 @@ func initK9sEnvLocs() error {
 
 	AppConfigFile = filepath.Join(AppConfigDir, data.MainConfigFile)
 	AppHotKeysFile = filepath.Join(AppConfigDir, "hotkeys.yaml")
+	AppKeymapsFile = filepath.Join(AppConfigDir, "keymaps.yaml")
 	AppAliasesFile = filepath.Join(AppConfigDir, "aliases.yaml")
 	AppPluginsFile = filepath.Join(AppConfigDir, "plugins.yaml")
 	AppViewsFile = filepath.Join(AppConfigDir, "views.yaml")
@@ -177,6 +185,7 @@ func initXDGLocs() error {
 	}
 
 	AppHotKeysFile = filepath.Join(AppConfigDir, "hotkeys.yaml")
+	AppKeymapsFile = filepath.Join(AppConfigDir, "keymaps.yaml")
 	AppAliasesFile = filepath.Join(AppConfigDir, "aliases.yaml")
 	AppPluginsFile = filepath.Join(AppConfigDir, "plugins.yaml")
 	AppViewsFile = filepath.Join(AppConfigDir, "views.yaml")
@@ -287,6 +296,19 @@ func EnsureHotkeysCfgFile() (string, error) {
 	}
 	if _, err := os.Stat(f); errors.Is(err, fs.ErrNotExist) {
 		return f, os.WriteFile(f, hotkeysTpl, data.DefaultFileMod)
+	}
+
+	return f, nil
+}
+
+// EnsureHotkeysCfgFile generates a valid hotkeys file.
+func EnsureKeymapsCfgFile() (string, error) {
+	f := filepath.Join(AppConfigDir, "keymaps.yaml")
+	if err := data.EnsureDirPath(f, data.DefaultDirMod); err != nil {
+		return "", err
+	}
+	if _, err := os.Stat(f); errors.Is(err, fs.ErrNotExist) {
+		return f, os.WriteFile(f, keymapsTpl, data.DefaultFileMod)
 	}
 
 	return f, nil
